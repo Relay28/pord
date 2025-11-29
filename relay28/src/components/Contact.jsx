@@ -2,14 +2,14 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { HiEnvelope, HiPaperAirplane } from 'react-icons/hi2';
-import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaFacebook } from 'react-icons/fa';
 import { contactInfo } from '../data/portfolioData';
 import './Contact.css';
 
 const Contact = () => {
   const [ref, inView] = useInView({
     triggerOnce: true,
-    threshold: 0.1,
+    threshold: 0.3,
   });
 
   const [formData, setFormData] = useState({
@@ -36,6 +36,7 @@ const Contact = () => {
     const icons = {
       github: FaGithub,
       linkedin: FaLinkedin,
+      facebook: FaFacebook,
     };
     const IconComponent = icons[iconName];
     return IconComponent ? <IconComponent /> : null;
@@ -43,12 +44,17 @@ const Contact = () => {
 
   return (
     <section id="contact" className="contact-section">
-      <div className="section-container">
+      <motion.div 
+        className="section-container"
+        initial={{ opacity: 0 }}
+        animate={inView ? { opacity: 1 } : { opacity: 0 }}
+        transition={{ duration: 0.5 }}
+      >
         <motion.div
           className="section-header"
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           ref={ref}
         >
           <span className="section-label">Get In Touch</span>
@@ -57,77 +63,36 @@ const Contact = () => {
         </motion.div>
 
         <div className="contact-content">
-          {/* Contact Information Card */}
+          {/* Contact Details - Compact Version */}
           <motion.div
-            className="contact-card"
+            className="contact-details-compact"
             initial={{ opacity: 0, y: 30 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="card-header">
-              <div className="card-icon">
-                <HiEnvelope />
-              </div>
-              <div>
-                <h3>Contact Details</h3>
-                <p>Get in touch via email</p>
-              </div>
-            </div>
-
-            <div className="card-content">
-              <motion.a
-                href={`mailto:${contactInfo.email}`}
-                className="email-link"
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.2 }}
-              >
-                {contactInfo.email}
-              </motion.a>
-
-              {/* Availability Status */}
-              {contactInfo.availability && (
-                <div className="availability-section">
-                  <div className="availability-header">
-                    <span className="status-dot"></span>
-                    <span className="status-label">{contactInfo.availability.status}</span>
-                  </div>
-                  <div className="availability-info">
-                    <div className="info-item">
-                      <span className="info-label">Looking for</span>
-                      <span className="info-value">{contactInfo.availability.types.join(', ')}</span>
-                    </div>
-                    <div className="info-item">
-                      <span className="info-label">Available from</span>
-                      <span className="info-value">{contactInfo.availability.startDate}</span>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* Social Links */}
-              <div className="social-section">
-                <h4>Connect</h4>
-                <div className="social-grid">
-                  {contactInfo.socialLinks
-                    .filter(social => social.icon === 'github' || social.icon === 'linkedin')
-                    .map((social, index) => (
-                    <motion.a
-                      key={social.name}
-                      href={social.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="social-button"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={inView ? { opacity: 1, y: 0 } : {}}
-                      transition={{ delay: 0.4 + index * 0.1 }}
-                      whileHover={{ y: -3 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      {getSocialIcon(social.icon)}
-                      <span>{social.name}</span>
-                    </motion.a>
-                  ))}
-                </div>
+            {/* Social Links */}
+            <div className="social-section-compact">
+              <p className="social-label">Connect with me:</p>
+              <div className="social-links-compact">
+                {contactInfo.socialLinks
+                  .filter(social => ['github', 'linkedin', 'facebook'].includes(social.icon))
+                  .map((social, index) => (
+                  <motion.a
+                    key={social.name}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="social-link-compact"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+                    transition={{ delay: 0.3 + index * 0.08, duration: 0.3 }}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    title={social.name}
+                  >
+                    {getSocialIcon(social.icon)}
+                  </motion.a>
+                ))}
               </div>
             </div>
           </motion.div>
@@ -135,9 +100,9 @@ const Contact = () => {
           {/* Message Form Card */}
           <motion.div
             className="contact-card"
-            initial={{ opacity: 0, y: 30 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            initial={{ opacity: 0, y: 40 }}
+            animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+            transition={{ duration: 0.7, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
           >
             <div className="card-header">
               <div className="card-icon">
@@ -155,8 +120,8 @@ const Contact = () => {
                   className="contact-form"
                   onSubmit={handleSubmit}
                   initial={{ opacity: 0 }}
-                  animate={inView ? { opacity: 1 } : {}}
-                  transition={{ delay: 0.4 }}
+                  animate={inView ? { opacity: 1 } : { opacity: 0 }}
+                  transition={{ delay: 0.5, duration: 0.4 }}
                 >
                   <div className="form-row">
                     <div className="form-group">
@@ -228,14 +193,14 @@ const Contact = () => {
             </div>
           </motion.div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Footer */}
       <motion.footer
         className="portfolio-footer"
         initial={{ opacity: 0 }}
-        animate={inView ? { opacity: 1 } : {}}
-        transition={{ duration: 0.6, delay: 0.5 }}
+        animate={inView ? { opacity: 1 } : { opacity: 0 }}
+        transition={{ duration: 0.5, delay: 0.6 }}
       >
         <p>&copy; {new Date().getFullYear()} All rights reserved. Built with React & Framer Motion</p>
       </motion.footer>

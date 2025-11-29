@@ -110,13 +110,6 @@ const Hero = () => {
           >
             <button
               className="text-link"
-              onClick={(e) => handleScrollToSection(e, '#about')}
-            >
-              About Me
-            </button>
-            <span className="link-separator">•</span>
-            <button
-              className="text-link"
               onClick={handleDownloadCV}
             >
               Download CV

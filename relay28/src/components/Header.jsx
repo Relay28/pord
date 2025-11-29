@@ -60,7 +60,7 @@ const Header = () => {
           whileTap={{ scale: 0.95 }}
         >
           <a href="#home" onClick={(e) => handleNavClick(e, '#home')}>
-            Portfolio
+            relay.dev
           </a>
         </motion.div>
 

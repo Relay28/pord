@@ -6,17 +6,22 @@ import './About.css';
 const About = () => {
   const [ref, inView] = useInView({
     triggerOnce: true,
-    threshold: 0.1,
+    threshold: 0.3,
   });
 
   return (
     <section id="about" className="about-section">
-      <div className="section-container">
+      <motion.div 
+        className="section-container"
+        initial={{ opacity: 0 }}
+        animate={inView ? { opacity: 1 } : { opacity: 0 }}
+        transition={{ duration: 0.5 }}
+      >
         <motion.div
           className="section-header"
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           ref={ref}
         >
           <span className="section-label">Get to Know Me</span>
@@ -28,7 +33,7 @@ const About = () => {
           <motion.div
             className="about-profile"
             initial={{ opacity: 0, x: -60 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
+            animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -60 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           >
             <motion.div
@@ -47,7 +52,7 @@ const About = () => {
           <motion.div
             className="about-details"
             initial={{ opacity: 0, x: 60 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
+            animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 60 }}
             transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
           >
             <div className="about-description">
@@ -63,9 +68,9 @@ const About = () => {
                     key={interest}
                     className="interest-tag"
                     initial={{ opacity: 0, scale: 0.8 }}
-                    animate={inView ? { opacity: 1, scale: 1 } : {}}
-                    transition={{ delay: 0.5 + index * 0.1 }}
-                    whileHover={{ scale: 1.1 }}
+                    animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+                    transition={{ delay: 0.4 + index * 0.05 }}
+                    whileHover={{ scale: 1.05 }}
                   >
                     {interest}
                   </motion.span>
@@ -78,9 +83,9 @@ const About = () => {
         {/* Education */}
         <motion.div
           className="education-section"
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.4 }}
+          initial={{ opacity: 0, y: 40 }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+          transition={{ duration: 0.7, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
         >
           <h3 className="education-title">Education</h3>
           <div className="education-cards">
@@ -89,7 +94,7 @@ const About = () => {
             ))}
           </div>
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 };
@@ -98,8 +103,8 @@ const EducationCard = ({ education: edu, inView }) => {
   return (
     <motion.div
       className="education-card"
-      whileHover={{ y: -5 }}
-      transition={{ duration: 0.3 }}
+      whileHover={{ y: -3 }}
+      transition={{ duration: 0.2 }}
     >
       <div className="education-header">
         <div>
@@ -122,9 +127,9 @@ const EducationCard = ({ education: edu, inView }) => {
               <motion.span
                 key={course}
                 className="course-tag"
-                initial={{ opacity: 0, y: 10 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: index * 0.05 }}
+                initial={{ opacity: 0 }}
+                animate={inView ? { opacity: 1 } : { opacity: 0 }}
+                transition={{ delay: index * 0.02, duration: 0.3 }}
               >
                 {course}
               </motion.span>
@@ -140,9 +145,9 @@ const EducationCard = ({ education: edu, inView }) => {
             {edu.achievements.map((achievement, index) => (
               <motion.li
                 key={index}
-                initial={{ opacity: 0, x: -10 }}
-                animate={inView ? { opacity: 1, x: 0 } : {}}
-                transition={{ delay: index * 0.1 }}
+                initial={{ opacity: 0 }}
+                animate={inView ? { opacity: 1 } : { opacity: 0 }}
+                transition={{ delay: index * 0.05, duration: 0.3 }}
               >
                 {achievement}
               </motion.li>

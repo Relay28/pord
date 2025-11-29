@@ -5,9 +5,9 @@
 // No coding knowledge required - just update the text, links, and information below
 
 export const personalInfo = {
-  name: "Rae Addison P. Duque",
-  title: "FullStack Developer | Infomration Technolgy Student",
-  tagline: "Building innovative solutions with modern technologies",
+  name: "relay.dev",
+  title: "FullStack Developer",
+  tagline: "Building innovative solutions that fit your needs.",
   email: "radzduque@gmail.com",
   location: "Cebu, Philippines",
   
@@ -39,7 +39,7 @@ export const personalInfo = {
     ],
     
     // Additional interests or technologies you're learning
-    interests: ["Web Development", "Machine Learning", "Open Source", "Networking","CyberSecurity","Cloud Computing"]
+    interests: ["Web Development","Mobile Development", "Machine Learning", "Open Source", "Networking","CyberSecurity","Cloud Computing"]
   },
   
   // Resume download link
@@ -65,7 +65,7 @@ export const projects = [
   {
     id: 2,
     title: "Memoire",
-    description: "A responsive task management application with drag-and-drop functionality and real-time updates.",
+    description: "a digital time capsule system designed to store and share memories over time through both web and mobile applications.",
     longDescription: "",
     image: "/projects/mmrlogo.png",
     tags: ["React", "Springboot", "MySQL", "Java", "Tailwind CSS","Kotlin","Javascript"],
@@ -92,39 +92,6 @@ export const projects = [
 // ============================================
 // Add your work experience, internships, or freelance work here
 export const experience = [
-//   {
-//     id: 1,
-//     position: "Frontend Developer Intern",
-//     company: "Tech Company Name",
-//     location: "City, Country",
-//     duration: "Jun 2024 - Aug 2024",
-//     type: "Internship", // Internship, Full-time, Part-time, Freelance
-//     description: [
-//       "Developed responsive web applications using React and TypeScript",
-//       "Collaborated with design team to implement pixel-perfect UI components",
-//       "Optimized application performance, reducing load time by 40%",
-//       "Participated in code reviews and followed agile development practices"
-//     ],
-//     technologies: ["React", "TypeScript", "Tailwind CSS", "Git"],
-//     current: false,
-//   },
-//   {
-//     id: 2,
-//     position: "Web Development Volunteer",
-//     company: "Non-Profit Organization",
-//     location: "Remote",
-//     duration: "Jan 2024 - May 2024",
-//     type: "Volunteer",
-//     description: [
-//       "Redesigned organization website, improving user engagement by 60%",
-//       "Implemented responsive design ensuring mobile compatibility",
-//       "Created content management system for easy updates",
-//       "Trained staff on website maintenance and updates"
-//     ],
-//     technologies: ["HTML", "CSS", "JavaScript", "WordPress"],
-//     current: false,
-//   },
-  // Add more experiences as needed
 ];
 
 // ============================================
@@ -232,6 +199,11 @@ export const contactInfo = {
       name: "LinkedIn",
       url: "https://linkedin.com/in/raeduqs",
       icon: "linkedin"
+    },
+    {
+      name: "Facebook",
+      url: "https://web.facebook.com/rae.addison.duque",
+      icon: "facebook"
     },
     {
       name: "Twitter",

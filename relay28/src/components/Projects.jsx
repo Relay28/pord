@@ -8,41 +8,22 @@ import './Projects.css';
 const Projects = () => {
   const [ref, inView] = useInView({
     triggerOnce: true,
-    threshold: 0.1,
+    threshold: 0.3,
   });
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 50, scale: 0.95 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        duration: 0.6,
-        ease: [0.22, 1, 0.36, 1],
-      },
-    },
-  };
 
   return (
     <section id="projects" className="projects-section">
-      <div className="section-container">
+      <motion.div 
+        className="section-container"
+        initial={{ opacity: 0 }}
+        animate={inView ? { opacity: 1 } : { opacity: 0 }}
+        transition={{ duration: 0.5 }}
+      >
         <motion.div
           className="section-header"
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           ref={ref}
         >
           <span className="section-label">Portfolio</span>
@@ -52,37 +33,31 @@ const Projects = () => {
           </p>
         </motion.div>
 
-        <motion.div
-          className="projects-grid"
-          variants={containerVariants}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-        >
-          {projects.map((project) => (
-            <ProjectCard key={project.id} project={project} variants={itemVariants} />
+        <div className="projects-grid">
+          {projects.map((project, index) => (
+            <ProjectCard key={project.id} project={project} index={index} />
           ))}
-        </motion.div>
-      </div>
+        </div>
+      </motion.div>
     </section>
   );
 };
 
-const ProjectCard = ({ project, variants }) => {
+const ProjectCard = ({ project, index }) => {
   const [ref, inView] = useInView({
     triggerOnce: true,
-    threshold: 0.1,
+    threshold: 0.3,
   });
 
   return (
     <motion.div
-      className={`project-card ${project.featured ? 'featured' : ''}`}
-      variants={variants}
+      className="project-card"
       ref={ref}
-      whileHover={{ y: -8, scale: 1.01 }}
-      transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+      initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+      animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      whileHover={{ y: -5 }}
     >
-      {project.featured && <span className="featured-badge">Featured</span>}
-      
       <div className="project-image">
         <img src={project.image} alt={project.title} />
         <div className="project-overlay">
@@ -122,13 +97,13 @@ const ProjectCard = ({ project, variants }) => {
         <p className="project-description">{project.description}</p>
         
         <div className="project-tags">
-          {project.tags.map((tag, index) => (
+          {project.tags.map((tag, tagIndex) => (
             <motion.span
-              key={index}
+              key={tagIndex}
               className="project-tag"
               initial={{ opacity: 0, scale: 0.8 }}
-              animate={inView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ delay: index * 0.05 }}
+              animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+              transition={{ delay: tagIndex * 0.05 }}
             >
               {tag}
             </motion.span>

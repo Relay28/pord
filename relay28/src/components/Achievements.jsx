@@ -7,7 +7,7 @@ import './Achievements.css';
 const Achievements = () => {
   const [ref, inView] = useInView({
     triggerOnce: true,
-    threshold: 0.1,
+    threshold: 0.3,
   });
 
   const getIcon = (iconType) => {
@@ -21,38 +21,19 @@ const Achievements = () => {
     return <IconComponent />;
   };
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.12,
-        delayChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 40, scale: 0.9 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        duration: 0.6,
-        ease: [0.22, 1, 0.36, 1],
-      },
-    },
-  };
-
   return (
     <section id="achievements" className="achievements-section">
-      <div className="section-container">
+      <motion.div 
+        className="section-container"
+        initial={{ opacity: 0 }}
+        animate={inView ? { opacity: 1 } : { opacity: 0 }}
+        transition={{ duration: 0.5 }}
+      >
         <motion.div
           className="section-header"
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           ref={ref}
         >
           <span className="section-label">Recognition</span>
@@ -62,44 +43,45 @@ const Achievements = () => {
           </p>
         </motion.div>
 
-        <motion.div
-          className="achievements-grid"
-          variants={containerVariants}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-        >
-          {achievements.map((achievement) => (
+        <div className="achievements-grid">
+          {achievements.map((achievement, index) => (
             <AchievementCard
               key={achievement.id}
               achievement={achievement}
-              variants={itemVariants}
+              index={index}
               getIcon={getIcon}
             />
           ))}
-        </motion.div>
-      </div>
+        </div>
+      </motion.div>
     </section>
   );
 };
 
-const AchievementCard = ({ achievement, variants, getIcon }) => {
+const AchievementCard = ({ achievement, index, getIcon }) => {
   const [ref, inView] = useInView({
     triggerOnce: true,
-    threshold: 0.1,
+    threshold: 0.3,
   });
 
   return (
     <motion.div
       className="achievement-card"
-      variants={variants}
       ref={ref}
-      whileHover={{ y: -8, scale: 1.02 }}
-      transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+      initial={{ opacity: 0, y: 50 }}
+      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+      transition={{ 
+        duration: 0.6, 
+        delay: index * 0.1,
+        ease: [0.22, 1, 0.36, 1] 
+      }}
+      whileHover={{ y: -5 }}
     >
       <motion.div
         className={`achievement-icon icon-${achievement.icon}`}
-        whileHover={{ rotate: 360, scale: 1.1 }}
-        transition={{ duration: 0.6 }}
+        initial={{ scale: 0, rotate: -180 }}
+        animate={inView ? { scale: 1, rotate: 0 } : { scale: 0, rotate: -180 }}
+        transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}
       >
         {getIcon(achievement.icon)}
       </motion.div>
