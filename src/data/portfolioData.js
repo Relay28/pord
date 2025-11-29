@@ -23,7 +23,7 @@ export const personalInfo = {
     and continue growing as a developer.`,
     
     // Image: Place your photo in the public folder and reference it here
-    image: "/profile-placeholder.JPG",
+    image: import.meta.env.BASE_URL + "profile-placeholder.JPG",
     
     // Skills with proficiency (0-100)
     skills: [
@@ -43,7 +43,7 @@ export const personalInfo = {
   },
   
   // Resume download link
-  resumeLink: "/resume.pdf"
+  resumeLink: import.meta.env.BASE_URL + "resume.pdf"
 };
 
 // ============================================
@@ -56,7 +56,7 @@ export const projects = [
     title: "WordMaster",
     description: "A interactive language learning platform designed to enhance vocabulary, grammar, and communication skills through role-based gameplay and comprehensive progress tracking.",
     longDescription: ".",
-    image: "/projects/WOMS.png", // Place images in public/projects folder
+    image: import.meta.env.BASE_URL + "projects/WOMS.png", // Place images in public/projects folder
     tags: ["React", "Springboot", "MySQL", "Java", "Python",,"Javascript","Gemini AI"],
     demoLink: "https://wordmaster-nu.vercel.app/login",
     githubLink: "https://github.com/Relay28/Wordmaster",
@@ -67,7 +67,7 @@ export const projects = [
     title: "Memoire",
     description: "a digital time capsule system designed to store and share memories over time through both web and mobile applications.",
     longDescription: "",
-    image: "/projects/mmrlogo.png",
+    image: import.meta.env.BASE_URL + "projects/mmrlogo.png",
     tags: ["React", "Springboot", "MySQL", "Java", "Tailwind CSS","Kotlin","Javascript"],
     demoLink: "https://it-342-memoire.vercel.app",
     githubLink: "https://github.com/Relay28/IT342-Memoire",
@@ -78,7 +78,7 @@ export const projects = [
     title: "NoteCraft",
     description: "A modern note taking and sharing app for better note organizing, joined with task management features and messaging for seamless collaboration.",
     longDescription: ".",
-    image: "/projects/notecraft.png",
+    image: import.meta.env.BASE_URL + "projects/notecraft.png",
     tags: ["React", "Springboot", "Java", "Javascript"],
     demoLink: "https://demo-link.com",
     githubLink: "https://github.com/relay28/NoteCraft",
