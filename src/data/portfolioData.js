@@ -164,7 +164,7 @@ export const education = [
       "Database Systems",
       "Software Engineering",
       "System Administration",
-      "CyberSecurity",
+      "Cybersecurity",
       "ServiceNow",
       "AWS",
       "Mobile Development",
